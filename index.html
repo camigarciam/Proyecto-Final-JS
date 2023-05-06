@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Entradas para el cine</title>
+	<link rel="stylesheet" type="text/css" href="./style.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+<body>
+
+	<div class="navdiv">
+	<nav class="navbar">
+	<h1 class="ver-carrito" id="verCarrito">🛒 <span id="cantidadCarrito" class="cantidadCarrito"></span></h1>
+	</nav>
+	</div>
+	<div id="Mcontainer" class="Mcontainer"></div>
+	<h2> El precio de todas las peliculas es de $450 por entrada</h2>
+	<div class="pelicontainer">
+		<h1>Entradas para el cine, elegí tu película!</h1>
+		<div>
+		<h3>Filtrar Genero de pelicula</h3>
+		<select id="filtrarPorGeneroChange">
+			<option value="Accion">Acción</option>
+			<option value="Thriller">Thriller</option>
+			<option value="Animacion">Animacion</option>
+			<option value="Terror">Terror</option>
+		</select>
+		<br>
+		<p id="mostrarPorGenero"></p>
+		</div>
+		<div class="peliculas" id="peliculas"> </div>
+
+		
+
+		<script src="./pf.js" ></script>
+
+	</body>
+	</html>
