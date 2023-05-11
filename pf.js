@@ -1,7 +1,16 @@
-//creo la clase peliculas y sus ids
+
 
 let id= 0
 
+/*setTimeout(()=>{
+    swal({
+        title: "Atención",
+        text: "Al clikkear en el botón 'ok' usted está aceptando comprar entradas en donde algunas peliculas tienen restricción etaria. Al momento de ingresar al lugar deberá mostrar dni",
+        icon: "warning",
+    });
+},1500)*/
+
+//creo la clase peliculas y sus ids
 class pelicula {
     constructor (nombre, genero, anio, productora, poster , cantidad){
         this.id = id++;
@@ -68,9 +77,16 @@ const PelisNuevos = [] //array vacio
    const MContainer = document.getElementById("Mcontainer")
    const cantidadCarrito = document.getElementById ("cantidadCarrito")
     const precio = 450
+    const Comentarios = document.getElementById("comentarios")
    let carrito = JSON.parse(localStorage.getItem("carrito")) || []
+   function vaciarCarrito() {
+    carrito = []
+    console.log(carrito.length)
+  MContainer.innerHTML = 'Tu carrito esta vacio'}
+
 
 //Pelis al dom
+
 PelisNuevos.forEach((pelicula) => {
     let content= document.createElement("div");
     content.innerHTML = `
@@ -78,9 +94,7 @@ PelisNuevos.forEach((pelicula) => {
     <img src="${pelicula.poster}" alt="${pelicula.nombre}" >
     <h2>${pelicula.nombre}</h2>
     <h3>Género: ${pelicula.genero}</h3>
-    <p> Cantidad : ${pelicula.cantidad} </p>
-    
-`
+    <p> Cantidad : ${pelicula.cantidad} </p>`
     ;
     peliculasid.append(content);
     
@@ -91,6 +105,11 @@ PelisNuevos.forEach((pelicula) => {
    
 
     comprar.addEventListener ("click", ()=> {
+        
+        Toastify({
+            text: `Entrada para la película ${pelicula.nombre} agregada al carrito`,
+            duration: 1500,
+        }).showToast()
     
     const repetido = carrito.some((Pelirepetida) => Pelirepetida.nombre === pelicula.nombre );
         ;
@@ -113,13 +132,14 @@ PelisNuevos.forEach((pelicula) => {
         carritoContador();
         guardarlocal();
     });
+
     console.log (carrito)
 
 });
-    
 
 
-    // carrito 
+
+ // carrito 
 
 
 
@@ -188,27 +208,60 @@ function CrearCarrito() {
 
     eliminar.addEventListener("click", ()=>{
         eliminarproducto(pelicula.nombre);
+        Toastify({
+            text: "Entrada eliminada del carrito",
+            duration: 1500,
+            style: {
+                background: "linear-gradient(to right, #ca5050, #ca5050)",
+              },
+        }).showToast()
 
         });
         
     
     })
 
-    const total = carrito.reduce ((acc, el)=> acc + el.cantidad * precio, 0)
+    
+    const total =carrito.reduce ((acc, el)=> acc + el.cantidad * precio, 0)
 
     const totalcompra= document.createElement ("div")
     totalcompra.className = ("totalcompra")
-    totalcompra.innerHTML = `total a pagar ${total}`
+    totalcompra.innerHTML = `total a pagar ${total}
+    <button id="comprar" class="comprar"> comprar entradas</button>`
     MContainer.append (totalcompra);
+
+    let comprar = document.getElementById("comprar")
+    comprar.addEventListener ('click', ()=>{
+        if (carrito.length !=0){
+        carrito.length = 0
+        MContainer.innerHTML= 'tu carrito está vacío'
+        swal({
+            title: "Compra realizada",
+            text: "Tu compra fue realizada con exito",
+            icon: "success",
+        })
+        vaciarCarrito();
+        guardarlocal();
+        CrearCarrito();}
+         else {
+        swal({
+            title: "Carrito vacio",
+            text: "Para poder realizar la compra debes seleccionar al menos una entrada",
+            icon: "error",
+        })
+        guardarlocal();
+        CrearCarrito() }
+     })
 }
-  
-    
 
-   
-    
-    
 
- verCarrito.addEventListener( "click", CrearCarrito);
+
+
+
+
+
+
+verCarrito.addEventListener( "click", CrearCarrito);
 
     const eliminarproducto = (nombre) => {
         const encontrarId = carrito.find ((element) => element.nombre === nombre)
@@ -233,15 +286,6 @@ function CrearCarrito() {
     }
 
 
-
-    /*
-    const totalcompra = document.createElement("div");
-    totalcompra.className = "totalcarrito"
-    totalcompra.InnerHTml = `total a pagar: ${total}`;
-    MHeader.append(totalcompra);
-    */
-    
-
 //fin carrito
 
 
@@ -252,18 +296,16 @@ function CrearCarrito() {
     JSON.parse(localStorage.getItem("carrito"));
 
 
-
-
-    //puedo agregar un sweet alert avisando que hay pelis +16
-
-
+//filtro    
     let filtrarPorGeneroChange = document.getElementById("filtrarPorGeneroChange")
 
     //evento change
     
-    filtrarPorGeneroChange.addEventListener("change", filtrarPorGenPeli)
+  filtrarPorGeneroChange.addEventListener("change", filtrarPorGenPeli)
     
    // funcion para filtrar 
+
+    
     
     function filtrarPorGenPeli(e){
         //obtenemos el valor seleccionado del select
@@ -279,35 +321,52 @@ function CrearCarrito() {
             peliFiltrada= PelisNuevos.filter((pelicula) => pelicula.genero === "Thriller")
         } else if (filtro === "Animacion") {
             peliFiltrada = PelisNuevos.filter((pelicula) => pelicula.genero === "Animacion")
+        }else if (filtro === "Terror") {
+            peliFiltrada = PelisNuevos.filter((pelicula) => pelicula.genero === "Terror")
         }
        
-    
+    console.log (peliFiltrada)
 
         //crear un nuevo elemento de HTML para peli filtrado y agregado por el DOM
-        peliFiltrada.forEach(info =>{
-        let p = document.createElement("p")
-      mostrarPorGenero.innerHTML = `El celular filtrado es el modelo ${info.nombre} de la marca ${info.genero}`
-      mostrarPorGenero.append(p)
-    })
- }
-
+       
+for (const pelis of peliFiltrada) {
+    let ul = document.createElement ("ul")
+    ul.innerHTML = `<h3>${pelis.nombre}</h3>`
+    mostrarPorGenero.append(ul)
     
+} }
+
+  
+
+
+    fetch ('https://jsonplaceholder.typicode.com/users')
+        .then ((resp)=>resp.json())
+        .then ((dato) => {
+
+            dato.forEach ((info, index)=>{
+               
+                setTimeout(() => 
+    
+                    Toastify({
+                    text: ` ${info.name} ya compró sus entradas!`,
+                    duration: 1500,
+                    position: "center",
+                    style: {
+                        background: "linear-gradient(to right, #77ff33,  #ffff33",
+                      },
+                    })
+                .showToast()
+                 
+            
+        , index * 80000);
+       
+        })
+
+    })
+        
+
 
 
     
 
   
-  /* <form>
-        <label for="${pelicula.nombre}-fecha">Elegí tu fecha:</label>
-        <input type="date" id="${pelicula.nombre}-fecha" name="fecha">
-        <br><br>
-        <label for="${pelicula.nombre}-idioma">Elegí tu idioma:</label>
-        <select id="${pelicula.nombre}-idioma" name="idioma">
-            <option value="english">Ingles</option>
-            <option value="spanish">Español</option>
-            <option value="french">Frances</option>
-            <option value="chinese">Chino</option>
-        </select>
-        <br>
-        <br>
-</form>*/ 

@@ -9,9 +9,15 @@ body {
 	text-align: center;
 }
 
-h1 {
+ .precioentradas h2{
+	background-color: #0069d9;
+}
+
+
+.pelicontainer h1 {
 	font-size: 60px;
 	margin-bottom: 20px;
+	background-color: #007bff;
 }
 
 label{
@@ -212,3 +218,4 @@ button:hover {
 	cursor: pointer;
 	background-color: aliceblue;
 }
+

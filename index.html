@@ -4,6 +4,8 @@
 	<title>Entradas para el cine</title>
 	<link rel="stylesheet" type="text/css" href="./style.css">
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"> 
+	<link rel="icon" href="https://static.vecteezy.com/system/resources/previews/011/720/979/non_2x/cinema-tickets-with-pop-corn-drink-amd-glasses-free-png.png">
 
 </head>
 <body>
@@ -13,10 +15,12 @@
 	<h1 class="ver-carrito" id="verCarrito">🛒 <span id="cantidadCarrito" class="cantidadCarrito"></span></h1>
 	</nav>
 	</div>
-	<div id="Mcontainer" class="Mcontainer"></div>
-	<h2> El precio de todas las peliculas es de $450 por entrada</h2>
+	<div id="Mcontainer" class="Mcontainer">
+	</div>
+	
 	<div class="pelicontainer">
-		<h1>Entradas para el cine, elegí tu película!</h1>
+		<h1> <i>Entradas para el cine, elegí tu película!</i></h1>
+		<h2 class="precioentradas"> El precio de todas las peliculas es de $450 por entrada</h2>
 		<div>
 		<h3>Filtrar Genero de pelicula</h3>
 		<select id="filtrarPorGeneroChange">
@@ -27,11 +31,12 @@
 		</select>
 		<br>
 		<p id="mostrarPorGenero"></p>
-		</div>
+		</div> 
 		<div class="peliculas" id="peliculas"> </div>
-
+		<div id="comentarios"></div>
 		
-
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 		<script src="./pf.js" ></script>
 
 	</body>
