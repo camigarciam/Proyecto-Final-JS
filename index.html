@@ -20,17 +20,21 @@
 	
 	<div class="pelicontainer">
 		<h1> <i>Entradas para el cine, elegí tu película!</i></h1>
-		<h2 class="precioentradas"> El precio de todas las peliculas es de $450 por entrada</h2>
+		<h2 id="precioentradas"> El precio de todas las peliculas es de $450 por entrada</h2>
 		<div>
-		<h3>Filtrar Genero de pelicula</h3>
+		<h3>Filtrar Género de pelicula</h3>
 		<select id="filtrarPorGeneroChange">
 			<option value="Accion">Acción</option>
 			<option value="Thriller">Thriller</option>
 			<option value="Animacion">Animacion</option>
 			<option value="Terror">Terror</option>
+			<option value="Scifi">Scifi</option>
+			<option value="Comedia">Comedia</option>
+			<option value="Fantasia">Fantasia</option>
+			<option value="Indie">Indie</option>
 		</select>
+		<p id="mostrarPorGenero" class="filtrogenero"></p>
 		<br>
-		<p id="mostrarPorGenero"></p>
 		</div> 
 		<div class="peliculas" id="peliculas"> </div>
 		<div id="comentarios"></div>

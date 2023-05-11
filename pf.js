@@ -2,17 +2,17 @@
 
 let id= 0
 
-/*setTimeout(()=>{
+setTimeout(()=>{
     swal({
         title: "Atención",
-        text: "Al clikkear en el botón 'ok' usted está aceptando comprar entradas en donde algunas peliculas tienen restricción etaria. Al momento de ingresar al lugar deberá mostrar dni",
+        text: "Al clikkear en el botón 'OK' usted está aceptando comprar entradas en donde algunas peliculas tienen restricción etaria. Al momento de ingresar al lugar deberá mostrar DNI",
         icon: "warning",
     });
-},1500)*/
+},1500)
 
 //creo la clase peliculas y sus ids
 class pelicula {
-    constructor (nombre, genero, anio, productora, poster , cantidad){
+    constructor (nombre, genero, anio, productora, poster , cantidad, resumen){
         this.id = id++;
         this.nombre = nombre;
         this.genero = genero;
@@ -20,6 +20,7 @@ class pelicula {
         this.productora = productora;
         this.poster = poster;
         this.cantidad = cantidad;
+        this.resumen = resumen;
     }
 }
 
@@ -66,10 +67,101 @@ const PelisNuevos = [] //array vacio
         "https://pics.filmaffinity.com/Midsommar-578791309-large.jpg",
         1,
     )
-    
+    let lallegada =new pelicula (
+        "La llegada",
+        "Scifi",
+        "2016",
+        "Paramount Pictures",
+        "https://pics.filmaffinity.com/La_llegada-150207636-large.jpg",
+        1,
 
+    )
+    let contratiemp= new pelicula (
+        "Contratiempo",
+        "Thriller",
+        "2017",
+        " Warner Bros.",
+        "https://pics.filmaffinity.com/Contratiempo-621094614-large.jpg",
+        1,
+    )
+    let scarface = new pelicula (
+        "Scarface",
+        "Acción",
+        "1983",
+        "Universal Pictures",
+        "https://pics.filmaffinity.com/El_precio_del_poder-798722679-large.jpg",
+        1,
+    )
+    let devilwears = new pelicula(
+        "The Devil wears Prada",
+        "Comedia",
+        "2006",
+        "20th Century Studios",
+        "https://pics.filmaffinity.com/the_devil_wears_prada-912143633-large.jpg",
+        1
+
+    )
     
-   PelisNuevos.push(Avengers , Joker , Parasite , ToyStory, MidSommar)
+    let barbieparis = new pelicula(
+        "Barbie: moda mágica en Paris",
+        "Animacion",
+        "2010",
+        "Universal Pictures Home Entertainment",
+        "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRnO-hEcPNJWJneB1izMQ_EsVjfc5DbjtqbJ2FqoRTHJuYnxxB_",
+        1,
+
+    )
+    let tenthings = new pelicula(
+        "10 razones para odiarte",
+        "Comedia",
+        "1999",
+        "Walt Disney Studios Motion Pictures",
+        "https://pics.filmaffinity.com/10_razones_para_odiarte-582281377-large.jpg",
+        1,
+    )
+    let abracadabra = new pelicula(
+        "Abracadabra",
+        "Comedia",
+        "1993",
+        "Walt Disney Pictures",
+        "https://pics.filmaffinity.com/Abracadabra-665291328-large.jpg",
+        1,
+    )
+    let sharkb = new pelicula(
+        "Las aventuras de Sharkboy y LavaGirl",
+        "Fantasia",
+        "2005",
+        "Columbia Pictures",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGlSfJrHWSUVwC9Sb2jNvWsppFHvepbuDl6qxMLgADL_0YTsHW",
+        1,
+
+    )
+    let ladybird = new pelicula (
+        "Lady Bird",
+        "Indie",
+        "2017",
+        "",
+        "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcT0Yf7_FepQU9VEbNsZ7824_2nvdFKOlogCo-yvJhSjuRA22aYg",
+        1,
+    )
+    let howto = new pelicula (
+        "Cómo entrenar a tu dragón 3",
+        "Acción",
+        "2019",
+        "Universal Pictures",
+        "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSzxaIK2qzAnjBsSP2wixHgOGU6dujLmwE0rqKb5MljPqZVrEWy",
+        1,
+    )
+    let chihiro= new pelicula (
+        "El viaje de Chihiro",
+        "Animacion",
+        "2001",
+        "Walt Disney Pictures",
+        "https://i.pinimg.com/originals/0b/94/a4/0b94a491c6942b289675d8c64120435e.png",
+        1
+    )
+
+   PelisNuevos.push(Avengers , Joker , Parasite , ToyStory, MidSommar, lallegada, contratiemp, scarface, devilwears, barbieparis, tenthings, abracadabra, sharkb, ladybird, howto, chihiro)
    const { nombre , genero , anio, productora, poster, cantidad } = Joker
 
 
@@ -94,14 +186,15 @@ PelisNuevos.forEach((pelicula) => {
     <img src="${pelicula.poster}" alt="${pelicula.nombre}" >
     <h2>${pelicula.nombre}</h2>
     <h3>Género: ${pelicula.genero}</h3>
+    <h4> ${pelicula.anio} <br> distribuida por ${pelicula.productora}</h4>
     <p> Cantidad : ${pelicula.cantidad} </p>`
     ;
     peliculasid.append(content);
-    
 
     let comprar = document.createElement ("button");
-    comprar.innerText= `Comprar entradas para ${pelicula.nombre}`;
-    peliculasid.append(comprar);
+    comprar.innerText= `Comprar entradas`;
+    
+    content.append(comprar);
    
 
     comprar.addEventListener ("click", ()=> {
@@ -169,7 +262,7 @@ function CrearCarrito() {
         carritoContenido.innerHTML = `
         <h3>${pelicula.nombre}</h3>
         <span class="restar"> - </span> 
-        <p> Cantidad de entradas: ${pelicula.cantidad} </p>
+        <p id="cantidadentradas"> ${pelicula.cantidad} </p>
          <span class="sumar"> + </span>
          <span class="eliminarproducto"> Eliminar Producto</span>
         <p> Total ${pelicula.cantidad * precio} </p>
@@ -226,7 +319,7 @@ function CrearCarrito() {
 
     const totalcompra= document.createElement ("div")
     totalcompra.className = ("totalcompra")
-    totalcompra.innerHTML = `total a pagar ${total}
+    totalcompra.innerHTML = `Total a pagar ${total}  
     <button id="comprar" class="comprar"> comprar entradas</button>`
     MContainer.append (totalcompra);
 
@@ -323,7 +416,15 @@ verCarrito.addEventListener( "click", CrearCarrito);
             peliFiltrada = PelisNuevos.filter((pelicula) => pelicula.genero === "Animacion")
         }else if (filtro === "Terror") {
             peliFiltrada = PelisNuevos.filter((pelicula) => pelicula.genero === "Terror")
-        }
+        }else if (filtro === "Scifi") {
+            peliFiltrada = PelisNuevos.filter((pelicula) => pelicula.genero === "Scifi")
+        }else if (filtro === "Comedia") {
+            peliFiltrada = PelisNuevos.filter((pelicula) => pelicula.genero === "Comedia")
+        } else if (filtro === "Fantasia") {
+            peliFiltrada = PelisNuevos.filter((pelicula) => pelicula.genero === "Fantasia")
+        } else if (filtro === "Indie") {
+            peliFiltrada = PelisNuevos.filter((pelicula) => pelicula.genero === "Indie")
+        }            
        
     console.log (peliFiltrada)
 
@@ -331,13 +432,46 @@ verCarrito.addEventListener( "click", CrearCarrito);
        
 for (const pelis of peliFiltrada) {
     let ul = document.createElement ("ul")
-    ul.innerHTML = `<h3>${pelis.nombre}</h3>`
+    ul.innerHTML = `<h3>"${pelis.nombre}"</h3>`
+    ul.className = "h3filtro"
     mostrarPorGenero.append(ul)
+    let comprar = document.createElement ("button");
+    comprar.innerText= `Comprar entradas para ${pelis.nombre}`;
+    ul.append(comprar);
+   
+
+    comprar.addEventListener ("click", ()=> {
+        
+        Toastify({
+            text: `Entrada para la película ${pelis.nombre} agregada al carrito`,
+            duration: 1500,
+        }).showToast()
     
+    const repetido = carrito.some((Pelirepetida) => pelis.nombre === pelis.nombre );
+        ;
+
+        if (repetido){
+            carrito.map ((pelis) =>{
+                if (pelis.nombre === pelis.nombre) {
+                    pelis.cantidad++;
+                }
+            })
+        } else {
+
+        carrito.push({
+            nombre:pelis.nombre,
+            img: pelis.poster,
+            cantidad: pelis.cantidad,
+        })
+        }
+
+        carritoContador();
+        guardarlocal();
+    });
 } }
-
+   
   
-
+//anuncio de quien compró entrads
 
     fetch ('https://jsonplaceholder.typicode.com/users')
         .then ((resp)=>resp.json())
@@ -358,7 +492,7 @@ for (const pelis of peliFiltrada) {
                 .showToast()
                  
             
-        , index * 80000);
+        , index * 60000);
        
         })
 
