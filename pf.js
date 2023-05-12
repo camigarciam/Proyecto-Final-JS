@@ -447,7 +447,7 @@ for (const pelis of peliFiltrada) {
             duration: 1500,
         }).showToast()
     
-    const repetido = carrito.some((Pelirepetida) => pelis.nombre === pelis.nombre );
+    const repetido = carrito.some((Pelirepetida) => Pelirepetida.nombre === pelis.nombre );
         ;
 
         if (repetido){
